@@ -1,0 +1,7 @@
+{
+    "manifest_version": 3,
+    "name": "Qwik Dev Tool",
+    "description": "Qwik Process Modeler",
+    "version": "1.0",
+    "devtools_page": "devtools.html"
+  }
