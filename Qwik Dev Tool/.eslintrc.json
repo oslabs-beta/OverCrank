@@ -1,0 +1,55 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "semi": ["off", "always"],
+      "@typescript-eslint/semi": "off",
+      "no-unexpected-multiline": "error"
+    },
+    "settings": {
+        "react": {
+        "version": "detect"
+        }
+  }
+}
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true
+//   },
+//   "extends": [
+//         "eslint:recommended",
+//         "plugin:react/recommended",
+//         "plugin:@typescript-eslint/recommended"
+//      ],
+//   "overrides": [],
+//   "parserOptions": {
+//     "ecmaVersion": "latest",
+//     "sourceType": "module",
+//     "project": "./tsconfig.json"
+//   },
+//   "plugins": ["react"],
+//   "rules": {
+//     "semi": ["off", "always"],
+//     "@typescript-eslint/semi": "off",
+//     "no-unexpected-multiline": "error"
+//   }
+// }
