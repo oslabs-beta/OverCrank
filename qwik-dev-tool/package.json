@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tw": "tailwindcss -i ./src/application/index.css -o ./src/extension/styles/output.css --watch",
+    "tw": "tailwindcss -i ./src/application/index.css -o ./src/application/output.css --watch",
     "lint": "eslint --fix --ext .ts,.tsx ./src"
   },
   "dependencies": {
