@@ -13,7 +13,7 @@ const buildTree = (html: Document) => {
     const buildTreeRecursive = (node: ChildNode, qwikComments: ChildNode[]): JSX.Element => {
         // Check to see if the node has on* based event that will be lazy loaded
         let lazyLoadedEvents: string[] = [];
-        const attributesNames = (node as Element).getAttributeNames()
+        const attributesNames = (node as Element).getAttributeNames();
         // Search for any attributes containing the on* keyword
         for(const attribute in attributesNames) {
             if(attribute.slice(0, 2) === 'on') lazyLoadedEvents.push(attribute);
@@ -38,7 +38,7 @@ const buildTree = (html: Document) => {
                 nodeId={String(id++)}
                 label={`${node.nodeName}`}
                 >
-                    {/* Note: not a fan of the "any" type here, as there is the chance of generating a null React Child if entire page is just comments which should never happen... */} 
+                    {/* NOTE: not a fan of the "any" type here, as there is the chance of generating a null React Child if entire page is just comments which should in theory never happen... */} 
                     {children.map((child: ChildNode, index: number): any => {
                         const qwikCommentStack: ChildNode[] = [];
                         // Check if it is an opening or closing qwik comment
@@ -52,11 +52,11 @@ const buildTree = (html: Document) => {
                     })}
                 </TreeItem>
             )
-            parsedDOMTree.push({ element: treeItem, qwik: qwikComments, lazyLoadedActions: lazyLoadedEvents })
+            parsedDOMTree.push({ element: treeItem, qwik: qwikComments, lazyLoadedActions: lazyLoadedEvents });
             return treeItem;
         }
     }
-    const el: ChildNode = html.childNodes[1]
+    const el: ChildNode = html.childNodes[1];
     buildTreeRecursive(el, []);
     // Return the TreeItems along with the comments
     return parsedDOMTree;
