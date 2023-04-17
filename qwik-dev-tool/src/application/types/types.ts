@@ -1,2 +1,6 @@
 // exports reusable types
-export default {};
+export type elementInfo = {
+    element: JSX.Element, 
+    qwik: ChildNode[],
+    lazyLoadedActions: string[]
+};
