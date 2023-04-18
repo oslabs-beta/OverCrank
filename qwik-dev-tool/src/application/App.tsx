@@ -6,6 +6,9 @@ import { elementInfo } from './types/types';
 import TreeView from '@mui/lab/TreeView';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TopBar from './components/TopBar';
+import TreeViewContainer from './containers/TreeViewContainer';
+import DataViewContainer from './containers/DataViewContainer';
 
 networkListener();
 const tree: elementInfo[] = buildTree(testDOM);
@@ -14,17 +17,13 @@ const tree: elementInfo[] = buildTree(testDOM);
 const App = () => {
   return (
     <>
-      <div className='text-rose-600'>Hi</div>
-      <TreeView
-      aria-label="file system navigator"
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
-      >
-        {tree[tree.length - 1].element}
-      </TreeView>
-    </>
-    
+      <TopBar></TopBar>
+      <div className='flex flex-row' >
+        <TreeViewContainer></TreeViewContainer>
+        <DataViewContainer></DataViewContainer>
+      </div>
+      
+    </> 
   ) 
 
 };
