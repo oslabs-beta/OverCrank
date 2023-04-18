@@ -11,6 +11,11 @@
     "lint": "eslint --fix --ext .ts,.tsx ./src"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.126",
+    "@mui/material": "^5.12.1",
     "@types/chrome": "^0.0.231",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
