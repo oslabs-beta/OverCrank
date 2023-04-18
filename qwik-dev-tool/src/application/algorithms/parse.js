@@ -1,5 +1,5 @@
 
-const html = `
+export const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,7 @@ const html = `
 </html>
 `
 
-const html2 = `
+exportconst html2 = `
 <html lang="en-us" q:container="paused" q:version="0.100.0" q:render="ssr-dev" q:base="/build/" q:locale=""><!--qv q:id=0 q:key=3scc:pY_0--><!--qv q:id=1 q:key=TxCF:35_3--><!--qv q:s q:sref=1 q:key=--><head q:head=""><meta charset="utf-8" q:head=""><link rel="manifest" href="/manifest.json" q:head=""><!--qv q:id=2 q:key=zrbr:35_0--><!--qv q:key=OA_0--><title q:head="">Qwik Todo List</title><link rel="canonical" href="http://localhost:5174/demo/todolist/" q:id="3" q:head=""><meta name="viewport" content="width=device-width, initial-scale=1.0" q:head=""><link rel="icon" type="image/svg+xml" href="/favicon.svg" q:head=""><!--/qv--><!--/qv--><link rel="stylesheet" href="/src/global.css"><link rel="stylesheet" href="/src/routes/demo/todolist/todolist.module.css"></head><body lang="en" data-qwik-inspector="root.tsx:22:7"><!--qv q:id=4 q:key=AKet:35_1--><!--qv q:id=5 q:key=VkLN:--><div class="page" q:key="XF_1" data-qwik-inspector="routes/layout.tsx:12:5"><main data-qwik-inspector="routes/layout.tsx:13:7"><!--qv q:s q:sref=5 q:key=--><!--qv q:id=6 q:key=J4V2:--><!--qv q:key=AP_3--><div class="section" data-qwik-inspector="routes/demo/todolist/index.tsx:40:7"><div class="container center" data-qwik-inspector="routes/demo/todolist/index.tsx:41:9"><h1 class="hero" data-qwik-inspector="routes/demo/todolist/index.tsx:42:11">TODO List</h1></div></div><div class="section bright" data-qwik-inspector="routes/demo/todolist/index.tsx:46:7"><div class="container center mh-300" data-qwik-inspector="routes/demo/todolist/index.tsx:47:9"><ul class="_list_14k68_1" q:key="AP_0" data-qwik-inspector="routes/demo/todolist/index.tsx:49:13"><li q:key="items-0" data-qwik-inspector="routes/demo/todolist/index.tsx:51:17">asd</li></ul></div></div><div class="section" data-qwik-inspector="routes/demo/todolist/index.tsx:58:7"><div class="container center" data-qwik-inspector="routes/demo/todolist/index.tsx:59:9"><form action="?qaction=tCQ608gnjnQ" preventdefault:submit="" method="post" data-spa-reset="true" on:submit="/src/routeactionqrl_action_submit_a5bzc7wo00a.js#routeActionQrl_action_submit_A5bZC7WO00A[0 1 2 3]" q:key="AP_2" q:id="7"><input type="text" name="text" required="" data-qwik-inspector="routes/demo/todolist/index.tsx:61:13"> <button type="submit" data-qwik-inspector="routes/demo/todolist/index.tsx:61:56">Add item</button></form><p class="_hint_14k68_11" data-qwik-inspector="routes/demo/todolist/index.tsx:64:11">PS: This little app works even when JavaScript is disabled.</p></div></div><!--/qv--><!--/qv--><!--/qv--></main></div><!--/qv--><script type="placeholder" hidden="" q:id="8" on-document:qinit="/src/routeroutlet_component_useondocument_event_knne9el0qfc.js#RouterOutlet_component_useOnDocument_event_KnNE9eL0qfc"></script><!--/qv--><!--qv q:key=35_2--><script>
 navigator.serviceWorker?.getRegistrations().then((regs) => {
   for (const reg of regs) {
