@@ -1,2 +1,11 @@
 // exports reusable types
-export default {};
+
+export interface Links {
+  [link: string]: string | null
+}
+
+export interface NodeData {
+  [id: string]: {
+    events: Links
+  }
+}
