@@ -83,7 +83,7 @@ const buildTree = (html: Document): elementInfo[] => {
     }
     const el: ChildNode = html.childNodes[0];
     buildTreeRecursive(el, []);
-    console.log('parsedDOMTree result:', parsedDOMTree);
+    // console.log('parsedDOMTree result:', parsedDOMTree);
     // Return the TreeItems along with the comments
     return parsedDOMTree;
 }

@@ -21,10 +21,6 @@ const App = () => {
       defaultExpandIcon={<ChevronRightIcon />}
       sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
       >
-        {/* {tree.map((child): any => {
-          console.log('Loading Element: ', child.element);
-          return child.element;
-        })} */}
         {tree[tree.length - 1].element}
       </TreeView>
     </>
