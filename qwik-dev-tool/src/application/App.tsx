@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
-import testDOM from './algorithms/getHtmlTest';
-import { elementInfo } from './types/types';
+import getDOM from './algorithms/getHtml';
 import TreeView from '@mui/lab/TreeView';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { NodeData, Links } from './types/types';
 
-networkListener();
-const tree: elementInfo[] = buildTree(testDOM);
 
 
 const App = () => {
+  const [nodeData, setNodeData] = useState<NodeData>({})
+  const [tree, setTree] = useState<JSX.Element | null>(null)
+  const [unassigned, setUnassigned] = useState<Links>({})
+  const [currentNode, setCurrentNode] = useState<number>(0)
+
+  useEffect(() => networkListener(), []) // feed network listener nodeData
+  useEffect(() => {
+    // call dom parser
+    (async () => {
+      const html:Document = await getDOM()
+      buildTree(html, unassigned, setUnassigned, nodeData, setNodeData, setTree);
+    })()
+  }, [nodeData])
+
+
   return (
     <>
       <div className='text-rose-600'>Hi</div>
@@ -21,7 +34,7 @@ const App = () => {
       defaultExpandIcon={<ChevronRightIcon />}
       sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
       >
-        {tree[tree.length - 1].element}
+        {tree}
       </TreeView>
     </>
     
