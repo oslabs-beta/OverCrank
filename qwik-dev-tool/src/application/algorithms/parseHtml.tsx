@@ -12,7 +12,6 @@ const buildTree = (
   setTree: Dispatch<SetStateAction<JSX.Element | null>>
 ): void => {
   // Create Top Level Tree containing the DOM Element and the associated Qwik data
-  console.log(html);
   const data: NodeData = {};
 
   let id = 0;
@@ -108,7 +107,6 @@ const buildTree = (
           })}
         </TreeItem>
       );
-      console.log(treeItem);
       data[id] = {
         element: treeItem,
         qwik: qwikComments,
