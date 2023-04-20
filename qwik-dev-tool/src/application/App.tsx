@@ -2,15 +2,10 @@ import React, {useState, useEffect} from 'react';
 import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
 import getDOM from './algorithms/getHtml';
-import TreeView from '@mui/lab/TreeView';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { NodeData, Links } from './types/types';
 import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
 import DataViewContainer from './containers/DataViewContainer';
-
-
 
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({})
@@ -42,7 +37,7 @@ const App = () => {
       <>
         <TopBar></TopBar>
         <div className='flex flex-row min-h-full' >
-          <TreeViewContainer></TreeViewContainer>
+          <TreeViewContainer tree={tree}></TreeViewContainer>
           <DataViewContainer></DataViewContainer>
         </div>
         
