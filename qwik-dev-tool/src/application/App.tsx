@@ -10,22 +10,35 @@ import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
 import DataViewContainer from './containers/DataViewContainer';
 
-networkListener();
-const tree: elementInfo[] = buildTree(testDOM);
-
+// Only enable if inside the Chrome browser as dependant upon API calls
+if(import.meta.env.PROD) networkListener();
 
 const App = () => {
-  return (
-    <>
-      <TopBar></TopBar>
-      <div className='flex flex-row' >
-        <TreeViewContainer></TreeViewContainer>
-        <DataViewContainer></DataViewContainer>
+  if(import.meta.env.DEV) {
+    return (
+      <div className=' min-h-screen first-letter:max-w-4xl bg-black'>
+        <TopBar></TopBar>
+        <div className='flex flex-row min-h-full' >
+          <TreeViewContainer></TreeViewContainer>
+          <DataViewContainer></DataViewContainer>
+        </div>
       </div>
-      
-    </> 
-  ) 
+    ); 
+  } else {
+    return (
+      <>
+        <TopBar></TopBar>
+        <div className='flex flex-row min-h-full' >
+          <TreeViewContainer></TreeViewContainer>
+          <DataViewContainer></DataViewContainer>
+        </div>
+        
+      </> 
+    );
+  }
 
 };
+
+
 
 export default App;

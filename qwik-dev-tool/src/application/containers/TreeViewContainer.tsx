@@ -6,22 +6,25 @@ import testDOM from '../algorithms/getHtmlTest';
 import { elementInfo } from '../types/types';
 import SearchBar from '../components/SearchBar'
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const tree: elementInfo[] = buildTree(testDOM);
 
 const TreeViewContainer = () => {
     return (
-      <div className='flex flex-col bg-color h-full w-3/5'>
-        <SearchBar></SearchBar>
-          <TreeView
-            className='h-full'
-            aria-label="file system navigator"
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpandIcon={<ChevronRightIcon />}
-            sx={{ maxHeight: '75vh', width: 'auto', flexGrow: 1, overflowY: 'auto' }}
-            >
-              {tree[tree.length - 1].element}
-          </TreeView>
+      <div className=' bg-neutral-800 flex flex-col w-3/5 border-white border-2 p-3'>
+        <Typography variant='body2' color="common.white">
+          <SearchBar></SearchBar>
+            <TreeView
+              aria-label="file system navigator"
+              defaultCollapseIcon={<ExpandMoreIcon />}
+              defaultExpandIcon={<ChevronRightIcon />}
+              sx={{ maxHeight: '80vh', width: 'auto', flexGrow: 1, overflowY: 'auto' }}
+              >
+                {tree[tree.length - 1].element}
+            </TreeView>
+          </Typography>
       </div>
      )
 }

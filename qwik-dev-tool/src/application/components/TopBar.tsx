@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
+
 import {
     Typography,
     AppBar,
@@ -11,19 +13,22 @@ import {
 
 const TopBar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "rgb(22, 22, 24)" }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Qwik DevTool
+          Qwik Dev Tool
         </Typography>
         <Link
-          href="https://github.com/yourusername/yourrepository"
+          href="https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool"
           target="_blank"
           rel="noopener noreferrer"
           underline="none"
           color="inherit"
-        >
-          <IconButton edge="end" color="inherit" aria-label="github">
+        > 
+          <Typography variant="body1" component="span" className='p-1 align-middle'>
+            Repo
+          </Typography>
+          <IconButton color="inherit" aria-label="github">
             <GitHubIcon />
           </IconButton>
         </Link>
@@ -32,11 +37,12 @@ const TopBar = () => {
           target="_blank"
           rel="noopener noreferrer"
           underline="none"
-        color="inherit"
-      >
-        <Typography variant="body1" component="span">
-          Thirsty boys website
-        </Typography>
+          color="inherit"
+        >
+          <Typography variant="body1" component="span" className='p-2 align-middle'>
+            Docs
+          </Typography>
+          <OpenInBrowserIcon></OpenInBrowserIcon>
       </Link>
     </Toolbar>
     </AppBar>
