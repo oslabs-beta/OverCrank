@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
-import testDOM from './algorithms/getHtmlTest';
+import getDOM from './algorithms/getHtml';
 import TreeView from '@mui/lab/TreeView';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -18,7 +18,10 @@ const App = () => {
   useEffect(() => networkListener(), []) // feed network listener nodeData
   useEffect(() => {
     // call dom parser
-    
+    (async () => {
+      const html:Document = await getDOM()
+      buildTree(html, unassigned, setUnassigned, nodeData, setNodeData, setTree);
+    })()
   }, [nodeData])
 
 
