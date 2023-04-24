@@ -1,10 +1,10 @@
 // exports reusable types
 
-export type Action = string;
+export type Action = string | null;
 export type Operation = string | null; 
 
 export type lazyLoadedNode = {
-    action?: Action,
+    action: Action,
     operation: Operation
 };
 
@@ -18,6 +18,17 @@ export type elementInfo = {
     events: Links
 };
 
-export interface NodeData {
+export type NodeData = {
   [id: string]: elementInfo
 }
+
+export type Resource = {
+    url: string;
+    type: string;
+    getContent: (callback: (content: string, encoding: string) => void) => any;
+    setContent: (
+      content: string,
+      commit: boolean,
+      callback?: (error?: object) => void
+    ) => any;
+  }
