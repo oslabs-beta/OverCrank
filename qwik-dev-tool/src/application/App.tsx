@@ -1,7 +1,8 @@
-import React, { useState, useEffect, PropsWithChildren, useRef } from 'react';
+import React, { useState, useEffect, PropsWithChildren, useRef, MutableRefObject } from 'react';
 import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
 import getDOM from './algorithms/getHtml';
+import { getResources } from './algorithms/getResources';
 import { NodeData, Links, Resource } from './types/types';
 import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
@@ -10,49 +11,13 @@ declare const chrome: any;
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({});
   const [tree, setTree] = useState<JSX.Element | null>(null);
-  const [unassigned, setUnassigned] = useState<Links>({});
   const [currentNode, setCurrentNode] = useState<number>(0);
-  const [dom, setDom] = useState<Document | null>(null);
-  const tempUnassigned = useRef<Links>({})
-
-  const getResources = () => {
-    chrome.devtools.inspectedWindow.onResourceAdded.addListener(
-      (resource: Resource) => {
-        if (
-          resource.url.includes('localhost:5173/src/') &&
-          !resource.url.includes('sourcemap')
-        ) {
-          resource.getContent((content, encoding) => assign(resource.url, content))
-          waitForDom(setDom);
-        }
-      }
-    );
-  };
-  const assign = (url: string, content: string):void => {
-    const shortenedURL = url.slice(url.indexOf('/src'))
-    const trimmedContent = content.slice(0, content.indexOf('//# sourceMappingURL'))
-    tempUnassigned.current = {
-      ...tempUnassigned.current,
-      [shortenedURL]: {
-        action: null,
-        operation: trimmedContent
-      }
-    }
-  }
-
-  const debounce: any = (func: any, delay: number) => {
-    let debounceTimer: any;
-    return (...args: any) => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => func.apply(this, args), delay);
-    };
-  };
-
-  const waitForDom = debounce(getDOM, 2000);
+  const [dom, setDOM] = useState<Document | null>(null);
+  const unassigned = useRef<Links>({})
 
   useEffect(() => {
-    getDOM(setDom);
-    getResources();
+    getDOM(setDOM);
+    getResources(unassigned, setDOM);
   }, []);
   useEffect(() => {
     // call dom parser
@@ -61,13 +26,11 @@ const App = () => {
         console.log('fired');
         buildTree(
           dom,
-          tempUnassigned.current,
-          setUnassigned,
+          unassigned.current,
           nodeData,
           setNodeData,
           setTree
         );
-        // networkListener(unassigned, setUnassigned, nodeData, setNodeData)
       }
     })();
   }, [dom]);

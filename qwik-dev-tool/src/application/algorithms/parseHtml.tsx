@@ -6,7 +6,6 @@ import { Dispatch, SetStateAction } from 'react';
 const buildTree = (
   html: Document,
   unassigned: Links,
-  setUnassigned: Dispatch<SetStateAction<Links>>,
   currentData: NodeData,
   setNodeData: Dispatch<SetStateAction<NodeData>>,
   setTree: Dispatch<SetStateAction<JSX.Element | null>>
@@ -34,15 +33,11 @@ const buildTree = (
           const attributeData = uncutAttributeData?.slice(0, uncutAttributeData.indexOf('#'))
           if (attribute.slice(0, 2) === 'on') {
             if (attributeData) {
-              console.log(attribute, attributeData)
-              console.log(lazyLoadedEvents)
+              console.log(attribute, attributeData, id)
               if (unassigned[attributeData]) {
                 lazyLoadedEvents[attributeData] = unassigned[attributeData];
                 lazyLoadedEvents[attributeData].action = attribute;
-                // console.log(lazyLoadedEvents)
-                // const temp = { ...unassigned };
                 delete unassigned[attributeData];
-                // setUnassigned(temp);
               } else {
                 let loaded = false;
                 for (const key in currentData) {
@@ -64,9 +59,7 @@ const buildTree = (
       }
     } catch (err) {
       console.log('Error in parsing attributes', err, 'Error node: ', node);
-    }
-    if (lazyLoadedEvents.length) console.log(lazyLoadedEvents, id)
-    
+    }  
     data[id] = {
         element: <></>,
         qwik: qwikComments,
