@@ -4,15 +4,15 @@ import React, {
   PropsWithChildren,
   useRef,
   MutableRefObject,
-} from "react";
-import networkListener from "./algorithms/networkListener";
-import buildTree from "./algorithms/parseHtml";
-import getDOM from "./algorithms/getHtml";
-import { getResources } from "./algorithms/getResources";
-import { NodeData, Links, Resource } from "./types/types";
-import TopBar from "./components/TopBar";
-import TreeViewContainer from "./containers/TreeViewContainer";
-import DataViewContainer from "./containers/DataViewContainer";
+} from 'react';
+import networkListener from './algorithms/networkListener';
+import buildTree from './algorithms/parseHtml';
+import getDOM from './algorithms/getHtml';
+import { getResources } from './algorithms/getResources';
+import { NodeData, Links, Resource } from './types/types';
+import TopBar from './components/TopBar';
+import TreeViewContainer from './containers/TreeViewContainer';
+import DataViewContainer from './containers/DataViewContainer';
 declare const chrome: any;
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({});
@@ -29,7 +29,7 @@ const App = () => {
     // call dom parser
     (async () => {
       if (dom) {
-        console.log("fired");
+        console.log('fired');
         buildTree(dom, unassigned.current, nodeData, setNodeData, setTree);
       }
     })();
@@ -37,9 +37,9 @@ const App = () => {
 
   return (
     <>
-      <div className="min-h-500px first-letter:max-w-4xl bg-black">
+      <div className='min-h-500px first-letter:max-w-4xl bg-black'>
         <TopBar></TopBar>
-        <div className="flex flex-row min-h-full">
+        <div className='flex flex-row min-h-full'>
           <TreeViewContainer
             tree={tree}
             nodeData={nodeData}
