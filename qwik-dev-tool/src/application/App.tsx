@@ -35,10 +35,9 @@ const App = () => {
     })();
   }, [dom]);
 
-  return tree && nodeData ? (
+  return (
     <>
-      <h1>Hello World</h1>
-      <div className='min-h-screen first-letter:max-w-4xl bg-black'>
+      <div className='min-h-500px first-letter:max-w-4xl bg-black'>
         <TopBar></TopBar>
         <div className='flex flex-row min-h-full'>
           <TreeViewContainer
@@ -51,22 +50,6 @@ const App = () => {
             currentNode={currentNode}
           ></DataViewContainer>
         </div>
-      </div>
-    </>
-  ) : (
-    <>
-      <h1>Hello World</h1>
-      <TopBar></TopBar>
-      <div className='flex flex-row min-h-full'>
-        <TreeViewContainer
-          tree={tree}
-          nodeData={nodeData}
-          setCurrentNode={setCurrentNode}
-        ></TreeViewContainer>
-        <DataViewContainer
-          nodeData={nodeData}
-          currentNode={currentNode}
-        ></DataViewContainer>
       </div>
     </>
   );
