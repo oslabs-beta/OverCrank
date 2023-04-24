@@ -12,7 +12,6 @@ const buildTree = (
   setTree: Dispatch<SetStateAction<JSX.Element | null>>
 ): void => {
   // Create Top Level Tree containing the DOM Element and the associated Qwik data
-  console.log(html);
   const data: NodeData = {};
 
   let id = 0;
@@ -31,23 +30,25 @@ const buildTree = (
         const attributesNames = (node as Element).getAttributeNames();
         // Search for any attributes containing the on* keyword
         for (const attribute of attributesNames) {
-          const attributeData = (node as Element).getAttribute(attribute);
+          const uncutAttributeData = (node as Element).getAttribute(attribute);
+          const attributeData = uncutAttributeData?.slice(0, uncutAttributeData.indexOf('#'))
           if (attribute.slice(0, 2) === 'on') {
             if (attributeData) {
+              console.log(attribute, attributeData)
+              console.log(lazyLoadedEvents)
               if (unassigned[attributeData]) {
                 lazyLoadedEvents[attributeData] = unassigned[attributeData];
                 lazyLoadedEvents[attributeData].action = attribute;
-                const temp = { ...unassigned };
-                delete temp[attributeData];
-                setUnassigned(temp);
+                // console.log(lazyLoadedEvents)
+                // const temp = { ...unassigned };
+                delete unassigned[attributeData];
+                // setUnassigned(temp);
               } else {
                 let loaded = false;
                 for (const key in currentData) {
                   if (currentData[key].events[attributeData]) {
-                    lazyLoadedEvents[attributeData] =
-                      currentData[key].events[attributeData];
+                    lazyLoadedEvents[attributeData] = currentData[key].events[attributeData];
                     loaded = true;
-                    break;
                   }
                 }
                 if (!loaded) {
@@ -64,17 +65,18 @@ const buildTree = (
     } catch (err) {
       console.log('Error in parsing attributes', err, 'Error node: ', node);
     }
-
+    if (lazyLoadedEvents.length) console.log(lazyLoadedEvents, id)
+    
+    data[id] = {
+        element: <></>,
+        qwik: qwikComments,
+        events: lazyLoadedEvents,
+      };
     // Create a new JSX TreeItem Element to the parseDOMTree along with associated Qwik data
     if (!node.hasChildNodes()) {
       const treeItem = (
         <TreeItem nodeId={String(id++)} label={`${node.nodeName}`} />
       );
-      data[id] = {
-        element: treeItem,
-        qwik: qwikComments,
-        events: lazyLoadedEvents,
-      };
       return treeItem;
     }
     // If there are children invoke buildTreeRecursive on the child node
@@ -108,12 +110,6 @@ const buildTree = (
           })}
         </TreeItem>
       );
-      console.log(treeItem);
-      data[id] = {
-        element: treeItem,
-        qwik: qwikComments,
-        events: lazyLoadedEvents,
-      };
       return treeItem;
     }
   };
