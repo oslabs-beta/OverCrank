@@ -6,6 +6,7 @@ export type Operation = string | null;
 export type lazyLoadedNode = {
     action: Action,
     operation: Operation
+    metrics: object | null
 };
 
 export interface Links {
@@ -32,3 +33,32 @@ export type Resource = {
       callback?: (error?: object) => void
     ) => any;
   }
+
+export type HarLogEntry = {
+  cache: object,
+  connection: string,
+  request: {
+    method: string,
+    url: string,
+  }
+  response: {
+    bodySize: number,
+    content: {
+      mimeType: string,
+      size: number
+    }
+    status: number,
+    statusText: string
+  }
+  startedDateTime: string,
+  time: string,
+  timings: {
+    blocked: number,
+    connect: number,
+    dns: number,
+    receive: number,
+    send: number,
+    ssl: number,
+    wait: number
+  }
+}

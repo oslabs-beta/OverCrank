@@ -50,6 +50,7 @@ const buildTree = (
                   lazyLoadedEvents[attributeData] = {
                     action: attribute,
                     operation: null,
+                    metrics: null
                   };
                 }
               }
