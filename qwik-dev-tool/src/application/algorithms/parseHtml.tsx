@@ -11,6 +11,7 @@ const buildTree = (
   setTree: Dispatch<SetStateAction<JSX.Element | null>>
 ): void => {
   // Create Top Level Tree containing the DOM Element and the associated Qwik data
+  console.log(currentData);
   const data: NodeData = {};
 
   let id = 0;
@@ -23,6 +24,7 @@ const buildTree = (
   ): JSX.Element => {
     // Check to see if the node has on* based event that will be lazy loaded
     let lazyLoadedEvents: Links = {};
+    let loaded = false;
     try {
       // Cannot extract attributes from empty comment nodes
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -42,12 +44,13 @@ const buildTree = (
                 lazyLoadedEvents[attributeData].action = attribute;
                 delete unassigned[attributeData];
               } else {
-                let loaded = false;
+                // let loaded = false;
                 for (const key in currentData) {
                   if (currentData[key].events[attributeData]) {
                     lazyLoadedEvents[attributeData] =
                       currentData[key].events[attributeData];
                     loaded = true;
+                    console.log('Loaded', String(loaded));
                   }
                 }
                 if (!loaded) {
@@ -70,12 +73,15 @@ const buildTree = (
       qwik: qwikComments,
       events: lazyLoadedEvents,
     };
+
+    const style = loaded ? { color: 'red' } : { color: 'white' };
     // Create a new JSX TreeItem Element to the parseDOMTree along with associated Qwik data
     if (!node.hasChildNodes()) {
       const treeItem = (
         <TreeItem
           nodeId={String(id++)}
           label={`${node.nodeName}`}
+          sx={style}
         />
       );
       return treeItem;
@@ -90,6 +96,7 @@ const buildTree = (
         <TreeItem
           nodeId={String(id++)}
           label={`${node.nodeName}`}
+          sx={style}
         >
           {children
             .map((child: ChildNode, index: number): JSX.Element | undefined => {
@@ -110,7 +117,8 @@ const buildTree = (
               // Exclude text data under elements and <script/> tags for readability
               else if (
                 child.nodeType === Node.TEXT_NODE ||
-                tagName === 'script'
+                tagName === 'script' ||
+                tagName === '#comment'
               ) {
                 return;
               }

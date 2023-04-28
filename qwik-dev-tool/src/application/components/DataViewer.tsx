@@ -4,11 +4,6 @@ import { Typography } from '@mui/material';
 import { FC } from 'react';
 import { NodeData } from '../types/types';
 
-const dummyText = `let dummyVal = 100;
-dummyVal++;
-console.log(dummyVal);
-`;
-
 type Props = {
   nodeData: NodeData;
   currentNode: number;
