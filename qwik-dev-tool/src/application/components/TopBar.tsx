@@ -3,21 +3,30 @@ import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 
 import { Typography, AppBar, Toolbar, Link, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import RefreshIcon from '@mui/icons-material/Refresh';
+declare const chrome: any;
 
 const TopBar = () => {
+  const handleRefresh = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs: any) => {
+      const activeTab = tabs[0];
+      chrome.tabs.reload(activeTab.id);
+    });
+    window.location.reload();
+  };
   return (
-    <AppBar
-      position='static'
-      sx={{ bgcolor: 'rgb(22, 22, 24)' }}
-    >
+    <AppBar position='static' sx={{ bgcolor: 'rgb(22, 22, 24)' }}>
       <Toolbar>
-        <Typography
-          variant='h6'
-          component='div'
-          sx={{ flexGrow: 1 }}
-        >
+        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           Qwik Dev Tool
         </Typography>
+        <IconButton
+          color='inherit'
+          className='refresh-btn'
+          onClick={handleRefresh}
+        >
+          <RefreshIcon />
+        </IconButton>
         <Link
           href='https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool'
           target='_blank'
@@ -32,10 +41,7 @@ const TopBar = () => {
           >
             Repo
           </Typography>
-          <IconButton
-            color='inherit'
-            aria-label='github'
-          >
+          <IconButton color='inherit' aria-label='github'>
             <GitHubIcon />
           </IconButton>
         </Link>
