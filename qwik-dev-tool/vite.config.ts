@@ -12,12 +12,15 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     css: true,
-    setupFiles: './src/test/setup.ts',
+    setupFiles: './src/tests/setup.ts',
   },
   build: {
     outDir: './src/extension/bundle',
     rollupOptions: {
       input: './src/application/index.jsx',
+      external(id) {
+        return id.startsWith('./src./tests');
+      },
       output: {
         dir: './src/extension/bundle',
         entryFileNames: `[name].js`,

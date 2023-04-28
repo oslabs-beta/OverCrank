@@ -3,12 +3,19 @@ import { Dispatch, SetStateAction } from 'react';
 declare const chrome: any;
 
 // parses html of target page in order to construct tree
-const parseData = async (setDom: Dispatch<SetStateAction<Document | null>>): Promise<Document> => {
+const parseData = async (
+  setDom: Dispatch<SetStateAction<Document | null>>
+): Promise<Document> => {
   // gets html of target page using Chrome API methods
   const html: string = await new Promise((resolve, reject) => {
     chrome.devtools.inspectedWindow.eval(
       'document.documentElement.outerHTML',
       (result: string, exception: string) => {
+        console.log(
+          'chrome.devtools.inspectedWindow.eval() returns result & exception'
+        );
+        console.log('result:', result);
+        console.log('exception:', exception);
         if (exception) {
           reject(exception);
         } else {
@@ -21,7 +28,7 @@ const parseData = async (setDom: Dispatch<SetStateAction<Document | null>>): Pro
   // parses HTML string into document object
   const parser = new DOMParser();
   const stringToDoc: Document = parser.parseFromString(html, 'text/html');
-  setDom(stringToDoc)
+  setDom(stringToDoc);
   // returns document object
   return stringToDoc;
 };
