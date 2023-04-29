@@ -38,9 +38,12 @@ const App = () => {
   return (
     <>
       <div className='min-h-500px first-letter:max-w-4xl bg-black'>
-        <TopBar></TopBar>
+        <div data-testid='top-bar'>
+          <TopBar></TopBar>
+        </div>
         <div className='flex flex-row min-h-full'>
           <TreeViewContainer
+            data-testid='tree-v'
             tree={tree}
             nodeData={nodeData}
             setCurrentNode={setCurrentNode}

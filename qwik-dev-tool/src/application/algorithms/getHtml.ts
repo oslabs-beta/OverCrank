@@ -1,4 +1,3 @@
-import buildTree from './parseHtml';
 import { Dispatch, SetStateAction } from 'react';
 declare const chrome: any;
 
