@@ -24,55 +24,51 @@
 
 //   it('App render should have TopBar component', () => {
 //     const chrome = {};
-    // const topBar = screen.findByTestId('top-bar');
-    // expect(topBar).toBeDefined();
+// const topBar = screen.findByTestId('top-bar');
+// expect(topBar).toBeDefined();
 //   });
 // });
 
 // VITEST (MAYBE JEST), PUPPETEER, & SINON-CHROME - Simulate chrome browser environment w/ access to chrome dev tool browser api
 
 import puppeteer from 'puppeteer';
-import sinonChrome from 'sinon-chrome/extensions';
-import {
-  describe,
-  expect,
-  test,
-} from 'vitest';
-import path from 'path';
+import sinonChrome from 'sinon-chrome';
+import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import App from '../application/App';
+import path from 'path';
 
-describe('Launch Chromium Env', async () => {
-  const pathToExtension = path.resolve(__dirname, '../extension/');
+describe(
+  'Launch Chromium Env',
+  async () => {
+    const pathToExtension = path.resolve(__dirname, '../extension/');
 
-  // Initialize sinon-chrome stubs
-  global.chrome = sinonChrome;
+    // Initialize sinon-chrome stubs
+    global.chrome = sinonChrome as unknown as typeof chrome;
 
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: [
-      `--disable-extensions-except=${pathToExtension}`,
-      `--load-extension=${pathToExtension}`,
-    ],
-  });
+    const browser = await puppeteer.launch({
+      headless: false,
+      args: [
+        `--disable-extensions-except=${pathToExtension}`,
+        `--load-extension=${pathToExtension}`,
+      ],
+    });
 
-    test("Render React Application to Chrome Dev Tool Panel", () => {
+    test('Render React Application to Chrome Dev Tool Panel', () => {
       render(<App />);
-      console.log(screen);
       const topBar = screen.getByTestId('top-bar');
       expect(topBar).toBeDefined();
     });
 
-    test("This should fail, searching for ID that does not exist", () => {
+    test('This should fail, searching for ID that does not exist', () => {
       render(<App />);
       const topBar = screen.getByTestId('FAILURE');
       expect(topBar).not.toBeDefined();
     });
 
-
-
-  const page = await browser.newPage();
-  await page.goto('https://qwik.builder.io');
-
-  await browser.close();
-}, { timeout: 100000});
+    const page = await browser.newPage();
+    await page.goto('https://qwik.builder.io');
+    await browser.close();
+  },
+  { timeout: 100000 }
+);
