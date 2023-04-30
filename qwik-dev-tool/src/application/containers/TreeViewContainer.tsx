@@ -15,6 +15,7 @@ type Props = {
 
 const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
   const [expanded, setExpanded] = useState<string[]>([]);
+  const [selectedItem, setSelectedItem] = useState<string>('');
 
   const expandClick: ClickType = () => {
     setExpanded(Object.keys(nodeData));
@@ -40,6 +41,8 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
         <SearchBar
           collapseClick={collapseClick}
           expandClick={expandClick}
+          setSelectedItem={setSelectedItem}
+          nodeData={nodeData}
         ></SearchBar>
         <TreeView
           aria-label='file system navigator'
@@ -56,6 +59,7 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
             overflowY: 'auto',
           }}
           onNodeSelect={selectClick}
+          selected={selectedItem}
         >
           {tree && tree}
         </TreeView>

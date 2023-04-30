@@ -1,7 +1,8 @@
 // Function that takes in the full DOM and returns a newly structured Object
 import { elementInfo, lazyLoadedNode, NodeData, Links } from '../types/types';
 import { TreeItem } from '@mui/lab';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
+import reactSyntaxHighlighter from 'react-syntax-highlighter';
 
 const buildTree = (
   html: Document,
@@ -72,6 +73,8 @@ const buildTree = (
       element: <></>,
       qwik: qwikComments,
       events: lazyLoadedEvents,
+      label: `${node.nodeName}`,
+      // ref: useRef(),
     };
 
     const style = loaded ? { color: 'red' } : { color: 'white' };
@@ -80,6 +83,7 @@ const buildTree = (
       const treeItem = (
         <TreeItem
           nodeId={String(id++)}
+          // ref={data[id].ref}
           label={`${node.nodeName}`}
           sx={style}
         />
@@ -95,6 +99,7 @@ const buildTree = (
       const treeItem = (
         <TreeItem
           nodeId={String(id++)}
+          // ref={data[id].ref}
           label={`${node.nodeName}`}
           sx={style}
         >
@@ -118,7 +123,8 @@ const buildTree = (
               else if (
                 child.nodeType === Node.TEXT_NODE ||
                 tagName === 'script' ||
-                tagName === '#comment'
+                tagName === '#comment' ||
+                tagName === 'path'
               ) {
                 return;
               }
@@ -136,9 +142,10 @@ const buildTree = (
     }
   };
   const main: ChildNode = html.childNodes[0];
+  console.log('Starting build tree process');
   setTree(buildTreeRecursive(main, []));
   setNodeData(data);
-  // console.log('parsedDOMTree result:', parsedDOMTree);
+  console.log('parsedDOMTree result:', data);
   // Return the TreeItems along with the comments
 };
 

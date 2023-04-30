@@ -32,13 +32,6 @@ const App = () => {
     setTabValue(newValue);
   };
 
-  function a11yProps(index: number) {
-    return {
-      id: `tab-${index}`,
-      'aria-controls': `tabpanel-${index}`,
-    };
-  }
-
   useEffect(() => {
     getDOM(setDOM);
     getResources(unassigned, setDOM);

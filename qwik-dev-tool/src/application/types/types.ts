@@ -1,5 +1,7 @@
 // exports reusable types
 
+import React from 'react';
+
 export type Action = string | null;
 export type Operation = string | null;
 
@@ -17,6 +19,8 @@ export type elementInfo = {
   element: JSX.Element;
   qwik: string[];
   events: Links;
+  label: string;
+  // ref: React.MutableRefObject<HTMLInputElement | null | undefined>;
 };
 
 export type NodeData = {
