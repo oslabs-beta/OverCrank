@@ -5,7 +5,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SearchBar from '../components/SearchBar';
 import { useState } from 'react';
 import { Typography } from '@mui/material';
-import { ClickType, ClickAction, NodeData } from '../types/types';
+import { ClickType, ClickAction, ClickActions, NodeData } from '../types/types';
 
 type Props = {
   tree: JSX.Element | null;
@@ -15,7 +15,11 @@ type Props = {
 
 const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [selectedItem, setSelectedItem] = useState<string>('');
+  const [prevSelectedItem, prevSetSelectedItem] = useState<HTMLElement | null>(
+    null
+  );
+  // NOTE: Mechanism necessary to refresh the highlighting when collapsing
+  const [notifyCollapse, setNotifyCollapse] = useState<boolean>(false);
 
   const expandClick: ClickType = () => {
     setExpanded(Object.keys(nodeData));
@@ -28,8 +32,22 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
   const selectClick: ClickAction = (event, id) => {
     if (expanded.includes(id)) setExpanded(expanded.filter((e) => e !== id));
     else setExpanded(expanded.concat(id));
+    console.log('Prev Node', prevSelectedItem);
+    if (
+      prevSelectedItem &&
+      prevSelectedItem.style &&
+      prevSelectedItem.style.background
+    )
+      prevSelectedItem.style.removeProperty('background-color');
+    nodeData[id].htmlElement.style.backgroundColor = 'black'; //'rgba(106, 90, 205, 0.6)';
+    prevSetSelectedItem(nodeData[id].htmlElement);
+    console.log('New Node', nodeData[id].htmlElement);
     console.log('Clicked nodeId: ' + String(id));
     setCurrentNode(Number(id));
+  };
+
+  const notifyCollapseClick: ClickActions = (event, id) => {
+    setNotifyCollapse(!notifyCollapse);
   };
 
   return (
@@ -41,7 +59,8 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
         <SearchBar
           collapseClick={collapseClick}
           expandClick={expandClick}
-          setSelectedItem={setSelectedItem}
+          // setSelectedItem={setSelectedItem}
+          notifyCollapse={notifyCollapse}
           nodeData={nodeData}
         ></SearchBar>
         <TreeView
@@ -59,7 +78,8 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
             overflowY: 'auto',
           }}
           onNodeSelect={selectClick}
-          selected={selectedItem}
+          onNodeToggle={notifyCollapseClick}
+          // selected={selectedItem}
         >
           {tree && tree}
         </TreeView>

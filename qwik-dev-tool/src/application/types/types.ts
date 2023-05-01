@@ -20,6 +20,7 @@ export type elementInfo = {
   qwik: string[];
   events: Links;
   label: string;
+  htmlElement: HTMLElement;
   // ref: React.MutableRefObject<HTMLInputElement | null | undefined>;
 };
 
@@ -70,6 +71,11 @@ export type HarLogEntry = {
 export type ClickAction = (
   event: React.SyntheticEvent<Element, Event>,
   id: string
+) => void;
+
+export type ClickActions = (
+  event: React.SyntheticEvent<Element, Event>,
+  id: string[]
 ) => void;
 
 export type ClickType = () => void;

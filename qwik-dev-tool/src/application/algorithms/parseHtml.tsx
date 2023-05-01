@@ -74,6 +74,7 @@ const buildTree = (
       qwik: qwikComments,
       events: lazyLoadedEvents,
       label: `${node.nodeName}`,
+      htmlElement: node as HTMLElement,
       // ref: useRef(),
     };
 

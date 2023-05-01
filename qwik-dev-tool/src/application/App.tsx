@@ -28,6 +28,14 @@ const App = () => {
   const unassigned = useRef<Links>({});
   const [tabValue, setTabValue] = useState('0');
 
+  let highlightTarget = () => {
+    document.body.style.backgroundColor = 'red';
+  };
+
+  chrome.scripting.executeScript(null, () => {
+    highlightTarget();
+  });
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
