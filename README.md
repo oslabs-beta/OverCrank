@@ -67,7 +67,7 @@ Contributions are always welcomed as Qwik is a rapidly evolving technology that 
 1. Clone the repo and make a new branch: `$ git checkout https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool.git -b [name_of_new_branch]`
 2. Add a feature,fix a bug, or refactor code
 3. Write or update tests for the changes you made, if necessary
-4. Open a Pull Request with a comprehensive description of changes
+4. Open a Pull Request targetting the `dev` branch with a comprehensive description of changes
 
 Thank you in advance for contributing!
 
