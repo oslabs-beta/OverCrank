@@ -19,9 +19,7 @@ export type elementInfo = {
   element: JSX.Element;
   qwik: string[];
   events: Links;
-  label: string;
   htmlElement: HTMLElement;
-  // ref: React.MutableRefObject<HTMLInputElement | null | undefined>;
 };
 
 export type NodeData = {

@@ -8,14 +8,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 type Props = {
   expandClick: ClickType;
   collapseClick: ClickType;
-  // setSelectedItem: Dispatch<SetStateAction<string>>;
   notifyCollapse: boolean;
   nodeData: NodeData;
 };
-
-interface Ref {
-  [index: number]: any;
-}
 
 const SearchBar: React.FC<Props> = (props): JSX.Element => {
   const { expandClick, collapseClick, notifyCollapse, nodeData } = props;
@@ -37,7 +32,6 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
   useEffect(() => {
     console.log('Search useEffect called');
     const foundMatches: HTMLElement[] = [];
-    // const foundMatches: HTMLElement[] = [...searchElements];
     const treeItems = document.querySelectorAll('.MuiTreeItem-label');
     treeItems.forEach((el) => {
       const htmlElement = el as HTMLElement;
@@ -55,19 +49,6 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
           foundMatches.push(htmlElement);
           htmlElement.innerHTML = `<mark>${htmlElement.innerHTML}</mark>`;
         }
-        // Remove existing mark tags that do not match
-        // else if (
-        //   !isTextPresentInElement &&
-        //   htmlElement.firstChild?.nodeName.toLowerCase() === 'mark'
-        // ) {
-        //   // foundMatches.splice(foundMatches.indexOf(htmlElement), 1);
-        //   const text = htmlElement.firstChild.textContent || '';
-        //   console.log('Removed mark on:', htmlElement);
-        //   htmlElement.replaceChild(
-        //     document.createTextNode(text),
-        //     htmlElement.firstChild
-        //   );
-        // }
       }
     });
 
@@ -129,9 +110,6 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
 
   const collapseAction = () => {
     resetSearch();
-    Array.from(document.getElementsByTagName('h1')).forEach((el) => {
-      el.style.color = 'red';
-    });
   };
 
   return (

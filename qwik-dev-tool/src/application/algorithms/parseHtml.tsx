@@ -2,7 +2,26 @@
 import { elementInfo, lazyLoadedNode, NodeData, Links } from '../types/types';
 import { TreeItem } from '@mui/lab';
 import { Dispatch, SetStateAction, useRef } from 'react';
-import reactSyntaxHighlighter from 'react-syntax-highlighter';
+
+const getStyle = (data: elementInfo, id: number) => {
+  let notLoaded = 0;
+  if (data) {
+    const events: string[] = Object.keys(data.events);
+    if (events.length) {
+      events.forEach((el) => {
+        data.events[el].operation === null && notLoaded++;
+      });
+
+      return notLoaded === events.length
+        ? { color: 'white' }
+        : notLoaded < events.length && notLoaded !== 0
+        ? { color: 'blue' }
+        : { color: 'purple' };
+    }
+  }
+
+  return { color: 'white' };
+};
 
 const buildTree = (
   html: Document,
@@ -25,7 +44,6 @@ const buildTree = (
   ): JSX.Element => {
     // Check to see if the node has on* based event that will be lazy loaded
     let lazyLoadedEvents: Links = {};
-    let loaded = false;
     try {
       // Cannot extract attributes from empty comment nodes
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -45,7 +63,7 @@ const buildTree = (
                 lazyLoadedEvents[attributeData].action = attribute;
                 delete unassigned[attributeData];
               } else {
-                // let loaded = false;
+                let loaded = false;
                 for (const key in currentData) {
                   if (currentData[key].events[attributeData]) {
                     lazyLoadedEvents[attributeData] =
@@ -73,20 +91,16 @@ const buildTree = (
       element: <></>,
       qwik: qwikComments,
       events: lazyLoadedEvents,
-      label: `${node.nodeName}`,
       htmlElement: node as HTMLElement,
-      // ref: useRef(),
     };
 
-    const style = loaded ? { color: 'red' } : { color: 'white' };
     // Create a new JSX TreeItem Element to the parseDOMTree along with associated Qwik data
     if (!node.hasChildNodes()) {
       const treeItem = (
         <TreeItem
+          sx={getStyle(data[id], id)}
           nodeId={String(id++)}
-          // ref={data[id].ref}
           label={`${node.nodeName}`}
-          sx={style}
         />
       );
       return treeItem;
@@ -99,10 +113,9 @@ const buildTree = (
 
       const treeItem = (
         <TreeItem
+          sx={getStyle(data[id], id)}
           nodeId={String(id++)}
-          // ref={data[id].ref}
           label={`${node.nodeName}`}
-          sx={style}
         >
           {children
             .map((child: ChildNode, index: number): JSX.Element | undefined => {
