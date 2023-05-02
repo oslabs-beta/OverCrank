@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "chrome"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "types/**/*.d.ts", "src/tests/App.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]

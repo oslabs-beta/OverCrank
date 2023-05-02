@@ -6,6 +6,8 @@
 //
 //  Unit Tests:
 //      buildTree function
+//			getHTML
+//			
 //
 //  Puppeteer + sinon.Chrome to simulate the test on a chromium page at a given URL
 //      (doesn't actually need to be a qwik app to test all the above though)
@@ -46,6 +48,7 @@ describe(
     // Initialize sinon-chrome stubs
     global.chrome = sinonChrome as unknown as typeof chrome;
 
+
     const browser = await puppeteer.launch({
       headless: false,
       args: [
@@ -54,21 +57,56 @@ describe(
       ],
     });
 
-    test('Render React Application to Chrome Dev Tool Panel', () => {
+    // Create new page
+    const page = await browser.newPage();
+    await page.goto('https://qwik.builder.io');
+
+    // // Open DevTools instance
+    // const devtools = await page.target().createCDPSession();
+    // console.log('DevTools:', devtools);
+
+    // // Enable runtime
+    // await devtools.send('Runtime.enable');
+
+    // // Switch to your extension's panel in the DevTools instance by executing this scrip
+    // await devtools.send('Runtime.evaluate', {
+    //   expression: `
+		// 		new Promise(resolve => {
+		// 			const intervalId = setInterval(() => {
+		// 				const extensionPanel = Array.from(document.querySelectorAll('.panel')).find(panel => panel.innerText.includes('Qwik Dev Tool'));
+		// 				if (extensionPanel) {
+		// 					extensionPanel.click();
+		// 					clearInterval(intervalId);
+		// 					resolve();
+		// 				}
+		// 			}, 100);
+		// 		});
+		// 	`,
+    //   returnByValue: true,
+    // });
+
+   
+    test('Render React Application to Document(I think) and Check for TopBar Id on Screen', () => {
       render(<App />);
       const topBar = screen.getByTestId('top-bar');
       expect(topBar).toBeDefined();
     });
 
-    test('This should fail, searching for ID that does not exist', () => {
+    test('Render App Component to Document(I think) and Check for FAILURE Id on Screen', () => {
       render(<App />);
       const topBar = screen.getByTestId('FAILURE');
-      expect(topBar).not.toBeDefined();
     });
 
-    const page = await browser.newPage();
-    await page.goto('https://qwik.builder.io');
-    await browser.close();
+    // await browser.close();
   },
   { timeout: 100000 }
 );
+
+//	JSDom is set as the environment for testing in the viteconfig and allows the test to use the document object
+//
+//  Puppeteer spins up a a chromium browser and goes to a designated page
+//
+//  Sinon-chrome provides the test with a mock chrome api
+//		Seems possible to be very fine grain for the algos but for now it just allows App to render and useEffect() without error
+//
+
