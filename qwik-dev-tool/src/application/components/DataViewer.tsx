@@ -5,11 +5,6 @@ import { FC } from 'react';
 import { NodeData, Metrics} from '../types/types';
 import MetricsChart from './MetricsChart';
 
-const dummyText = `let dummyVal = 100;
-dummyVal++;
-console.log(dummyVal);
-`;
-
 type Props = {
   nodeData: NodeData;
   currentNode: number;

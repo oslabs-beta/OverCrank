@@ -22,14 +22,15 @@ export type lazyLoadedNode = {
     metrics: Metrics
 };
 
-export interface Links {
+export type Links = {
   [link: string]: lazyLoadedNode
 };
 
 export type elementInfo = {
     element: JSX.Element, 
     qwik: string[],
-    events: Links
+    events: Links,
+    htmlElement: HTMLElement;
 };
 
 export type NodeData = {
@@ -77,11 +78,19 @@ export type HarLogEntry = {
   }
 }
 
-export type UnassignedReferral = {
-  "http://localhost:5173/": MetricsNode
-}
-
 export type MetricsNode = {
   children: MetricsNode[]
   name: string
 }
+
+export type ClickAction = (
+  event: React.SyntheticEvent<Element, Event>,
+  id: string
+) => void;
+
+export type ClickActions = (
+  event: React.SyntheticEvent<Element, Event>,
+  id: string[]
+) => void;
+
+export type ClickType = () => void;
