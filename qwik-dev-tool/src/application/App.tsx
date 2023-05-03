@@ -5,14 +5,14 @@ import React, {
   useRef,
   MutableRefObject,
 } from 'react';
-import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
 import getDOM from './algorithms/getHtml';
 import { getResources } from './algorithms/getResources';
-import { NodeData, Links, Resource } from './types/types';
+import { NodeData, Links, MetricsNode } from './types/types';
 import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
 import DataViewContainer from './containers/DataViewContainer';
+import MetricsTreeContainer from './containers/MetricsTreeContainer';
 import Tab from '@mui/material/Tab';
 import { TabPanel } from '@mui/lab';
 import TabContext from '@mui/lab/TabContext';
@@ -23,9 +23,11 @@ declare const chrome: any;
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({});
   const [tree, setTree] = useState<JSX.Element | null>(null);
+  const [metricsTree, setMetricsTree] = useState<MetricsNode>({name: "http://localhost:5173/", children: []})
   const [currentNode, setCurrentNode] = useState<number>(0);
   const [dom, setDOM] = useState<Document | null>(null);
   const unassigned = useRef<Links>({});
+  const unassignedLog = useRef<MetricsNode>({name: "http://localhost:5173/", children: []})
   const [tabValue, setTabValue] = useState('0');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -34,14 +36,15 @@ const App = () => {
 
   useEffect(() => {
     getDOM(setDOM);
-    getResources(unassigned, setDOM);
+    getResources(unassigned, unassignedLog, setDOM);
   }, []);
   useEffect(() => {
     // call dom parser
-    (async () => {
+    (() => {
       if (dom) {
-        console.log('fired');
         buildTree(dom, unassigned.current, nodeData, setNodeData, setTree);
+        const temp = {...unassignedLog.current}
+        setMetricsTree({...temp})
       }
     })();
   }, [dom]);
@@ -86,7 +89,7 @@ const App = () => {
             </div>
           </TabPanel>
           <TabPanel value='1'>
-            <h1 style={{ color: 'white' }}>Tab 2</h1>
+            <MetricsTreeContainer data={metricsTree} />
           </TabPanel>
         </TabContext>
       </div>

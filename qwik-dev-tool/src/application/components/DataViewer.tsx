@@ -1,8 +1,10 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { agate } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Typography } from '@mui/material';
 import { FC } from 'react';
-import { NodeData } from '../types/types';
+import { NodeData, Metrics} from '../types/types';
+import MetricsChart from './MetricsChart';
 
 type Props = {
   nodeData: NodeData;
@@ -13,15 +15,18 @@ type Info = {
   loaded: string | null;
   action: (string | null)[] | null;
   operation: (string | null)[] | null;
+  metrics: Metrics[] | null;
 };
 
+SyntaxHighlighter.registerLanguage('javascript', js);
+
 const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
-  console.log(nodeData);
   const info: Info = {
     element: null,
     loaded: null,
     action: null,
     operation: null,
+    metrics: null
   };
   if (Object.keys(nodeData).length) {
     const events: string[] = Object.keys(nodeData[currentNode].events);
@@ -62,9 +67,22 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
       }
       return js;
     })();
-    (info.element = nodeData[currentNode].element), (info.loaded = loaded);
+    const metrics = (() => {
+      const metrics: Metrics[] = [];
+      if (events.length) {
+        events.forEach((el) => {
+          if (nodeData[currentNode].events[el].metrics !== undefined) {
+            metrics.push(nodeData[currentNode].events[el].metrics);
+          }
+        });
+      }
+      return metrics;
+    })();
+    info.element = nodeData[currentNode].element
+    info.loaded = loaded
     info.action = actions;
     info.operation = operations;
+    info.metrics = metrics
   }
   return (
     <div className='flex flex-col p-2'>
@@ -73,27 +91,32 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
         color='common.white'
       >
         <div
-          id='element'
-          className='pb-1 pt-5'
-        >
-          <h1>HTML Element:</h1>
-          {info.element}
-        </div>
-        <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
-        <div
           id='is-loaded'
           className='py-1'
         >
-          <h6>Is Loaded:</h6>
-          {info.loaded}
+          <h6>Is Loaded: {info.loaded}</h6>
         </div>
         <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
         <div
           id='action'
           className='py-1'
         >
-          <h6>Action: </h6>
-          {info.action}
+          <h6>Action: {info.action}</h6>
+        </div>
+        <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
+        <div
+          id='size'
+          className='py-1'
+        >
+          <h6>Size: {info.metrics?.map((el => el?.size))}</h6>
+        </div>
+        <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
+        <div
+          id='metrics'
+          className='py-1'
+        >
+          <h6>Download Metrics:</h6>
+          <MetricsChart metrics={info.metrics}/>
         </div>
         <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
         <div
@@ -102,7 +125,7 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
         >
           <h6>Operation: </h6>
           <SyntaxHighlighter
-            language='typescript'
+            language='javascript'
             style={agate}
             showLineNumbers={true}
             customStyle={{

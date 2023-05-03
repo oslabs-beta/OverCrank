@@ -13,14 +13,14 @@ const getStyle = (data: elementInfo, id: number) => {
       });
 
       return notLoaded === events.length
-        ? { color: 'white' }
+        ? { color: '#AC7EF4' }
         : notLoaded < events.length && notLoaded !== 0
-        ? { color: 'blue' }
-        : { color: 'purple' };
+        ? { color: '#18B6F6' }
+        : { color: '#18B6F6' };
     }
   }
 
-  return { color: 'white' };
+  return { color: '#FFFFFF' };
 };
 
 const buildTree = (
@@ -31,7 +31,7 @@ const buildTree = (
   setTree: Dispatch<SetStateAction<JSX.Element | null>>
 ): void => {
   // Create Top Level Tree containing the DOM Element and the associated Qwik data
-  console.log(currentData);
+  // console.log(currentData);
   const data: NodeData = {};
 
   let id = 0;
@@ -57,7 +57,7 @@ const buildTree = (
           );
           if (attribute.slice(0, 2) === 'on') {
             if (attributeData) {
-              console.log(attribute, attributeData, id);
+              // console.log(attribute, attributeData, id);
               if (unassigned[attributeData]) {
                 lazyLoadedEvents[attributeData] = unassigned[attributeData];
                 lazyLoadedEvents[attributeData].action = attribute;
@@ -69,7 +69,7 @@ const buildTree = (
                     lazyLoadedEvents[attributeData] =
                       currentData[key].events[attributeData];
                     loaded = true;
-                    console.log('Loaded', String(loaded));
+                    // console.log('Loaded', String(loaded));
                   }
                 }
                 if (!loaded) {
@@ -159,7 +159,7 @@ const buildTree = (
   console.log('Starting build tree process');
   setTree(buildTreeRecursive(main, []));
   setNodeData(data);
-  console.log('parsedDOMTree result:', data);
+  // console.log('parsedDOMTree result:', data);
   // Return the TreeItems along with the comments
 };
 

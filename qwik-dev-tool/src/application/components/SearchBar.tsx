@@ -30,7 +30,7 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
   // Search for specified text through list of objects
   // NOTE: It is bad practice to directly access the HTML elements of our page using React; however, MUI-5 deprecated the scrollInto functionality found in MUI-4 and provides not alternative mechanism to force the window to be scrolled into.
   useEffect(() => {
-    console.log('Search useEffect called');
+    // console.log('Search useEffect called');
     const foundMatches: HTMLElement[] = [];
     const treeItems = document.querySelectorAll('.MuiTreeItem-label');
     treeItems.forEach((el) => {
@@ -44,8 +44,8 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
           isTextPresentInElement &&
           htmlElement.firstChild?.nodeType === Node.TEXT_NODE
         ) {
-          console.log(htmlElement);
-          console.log(htmlElement.childNodes);
+          // console.log(htmlElement);
+          // console.log(htmlElement.childNodes);
           foundMatches.push(htmlElement);
           htmlElement.innerHTML = `<mark>${htmlElement.innerHTML}</mark>`;
         }
@@ -54,7 +54,7 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
 
     setSearchElements(foundMatches);
     setCurrentSearchItem(0);
-    console.log('Found Matches:', foundMatches);
+    // console.log('Found Matches:', foundMatches);
   }, [redraw]);
 
   // Remove all mark tags
@@ -64,7 +64,7 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
       const htmlElement = el as HTMLElement;
       if (htmlElement.firstChild?.nodeName.toLowerCase() === 'mark') {
         const text = htmlElement.firstChild.textContent || '';
-        console.log('Removed mark on:', htmlElement);
+        // console.log('Removed mark on:', htmlElement);
         htmlElement.replaceChild(
           document.createTextNode(text),
           htmlElement.firstChild
@@ -87,7 +87,7 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
     console.log('force scroll useEffect called');
     if (searchElements.length > 0 && currentSearchItem < searchElements.length)
       searchElements[currentSearchItem].scrollIntoView();
-    console.log('force scroll completed');
+    // console.log('force scroll completed');
   }, [currentSearchItem]);
 
   const moveToNextItem = () => {

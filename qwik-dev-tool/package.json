@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tw": "tailwindcss -i ./src/application/index.css -o ./src/application/output.css --watch",
+    "tw": "tailwindcss -i index.css -o ./src/application/output.css --watch",
     "lint": "eslint --fix --ext .ts,.tsx ./src",
     "test": "vitest"
   },
@@ -23,6 +23,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-syntax-highlighter": "^15.5.0",
+    "react-tree-graph": "^8.0.1",
+    "recharts": "^2.5.0",
     "vite-plugin-css-injected-by-js": "^3.1.0"
   },
   "devDependencies": {
@@ -37,6 +39,7 @@
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^21.1.1",
     "postcss": "^8.4.21",
+    "rollup-plugin-visualizer": "^5.9.0",
     "tailwindcss": "^3.3.1",
     "typescript": "^4.9.5",
     "vite": "^4.2.0",

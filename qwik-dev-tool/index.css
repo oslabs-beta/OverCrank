@@ -31,3 +31,22 @@ body {
 ::-webkit-resizer {
   background-color: #666;
 }
+
+svg.custom .node circle {
+	fill: #F3F3FF;
+	stroke: #18B6F6;
+	stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+	font-size: 11px;
+	background-color: #444;
+	fill: #F4F4F4;
+	/* text-shadow: 0 1px 4px black; */
+}
+
+svg.custom path.link {
+	fill: none;
+	stroke: #18B6F6;
+	stroke-width: 1.5px;
+}
