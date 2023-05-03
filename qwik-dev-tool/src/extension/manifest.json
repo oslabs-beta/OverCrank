@@ -3,5 +3,10 @@
   "name": "Qwik Dev Tool",
   "description": "Qwik Process Modeler",
   "version": "1.0",
+  "icons": {
+    "16": "assets/overcrank-16.png",
+    "48": "assets/overcrank-48.png",
+    "128": "assets/overcrank-128.png"
+  },
   "devtools_page": "devtools.html"
 }

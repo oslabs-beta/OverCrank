@@ -9,7 +9,7 @@ import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
 import getDOM from './algorithms/getHtml';
 import { getResources } from './algorithms/getResources';
-import { NodeData, Links, Resource } from './types/types';
+import { NodeData, Links, UnassignedReferral, MetricsNode } from './types/types';
 import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
 import DataViewContainer from './containers/DataViewContainer';
@@ -17,20 +17,26 @@ declare const chrome: any;
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({});
   const [tree, setTree] = useState<JSX.Element | null>(null);
+  const [metricsTree, setMetricsTree] = useState<MetricsNode>({name: "http://localhost:5173/", children: []})
   const [currentNode, setCurrentNode] = useState<number>(0);
   const [dom, setDOM] = useState<Document | null>(null);
   const unassigned = useRef<Links>({});
+  const unassignedLog = useRef<MetricsNode>({name: "http://localhost:5173/", children: []})
 
   useEffect(() => {
     getDOM(setDOM);
-    getResources(unassigned, setDOM);
+    getResources(unassigned, unassignedLog, setDOM);
   }, []);
   useEffect(() => {
     // call dom parser
-    (async () => {
+    (() => {
       if (dom) {
         console.log('fired');
         buildTree(dom, unassigned.current, nodeData, setNodeData, setTree);
+        const temp = {...unassignedLog.current}
+        console.log('temp',temp)
+        setMetricsTree({...temp})
+        console.log(metricsTree, unassignedLog, temp);
       }
     })();
   }, [dom]);

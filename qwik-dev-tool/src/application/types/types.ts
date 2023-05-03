@@ -2,11 +2,24 @@
 
 export type Action = string | null;
 export type Operation = string | null; 
+export type Metrics = {
+  size: string,
+  startedDateTime: string,
+  finishedDateTime: string,
+  time: number,
+  blocked: number,
+  connect: number,
+  dns: number,
+  receive: number,
+  send: number,
+  ssl: number,
+  wait: number,
+} | null
 
 export type lazyLoadedNode = {
     action: Action,
     operation: Operation
-    metrics: object | null
+    metrics: Metrics
 };
 
 export interface Links {
@@ -40,6 +53,7 @@ export type HarLogEntry = {
   request: {
     method: string,
     url: string,
+    headers: {name: string, value: string}[]
   }
   response: {
     bodySize: number,
@@ -51,7 +65,7 @@ export type HarLogEntry = {
     statusText: string
   }
   startedDateTime: string,
-  time: string,
+  time: number,
   timings: {
     blocked: number,
     connect: number,
@@ -61,4 +75,13 @@ export type HarLogEntry = {
     ssl: number,
     wait: number
   }
+}
+
+export type UnassignedReferral = {
+  "http://localhost:5173/": MetricsNode
+}
+
+export type MetricsNode = {
+  children: MetricsNode[]
+  name: string
 }
