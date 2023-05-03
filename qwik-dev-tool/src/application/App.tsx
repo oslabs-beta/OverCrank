@@ -5,7 +5,6 @@ import React, {
   useRef,
   MutableRefObject,
 } from 'react';
-import networkListener from './algorithms/networkListener';
 import buildTree from './algorithms/parseHtml';
 import getDOM from './algorithms/getHtml';
 import { getResources } from './algorithms/getResources';
@@ -13,6 +12,7 @@ import { NodeData, Links, MetricsNode } from './types/types';
 import TopBar from './components/TopBar';
 import TreeViewContainer from './containers/TreeViewContainer';
 import DataViewContainer from './containers/DataViewContainer';
+import MetricsTreeContainer from './containers/MetricsTreeContainer';
 import Tab from '@mui/material/Tab';
 import { TabPanel } from '@mui/lab';
 import TabContext from '@mui/lab/TabContext';
@@ -42,12 +42,9 @@ const App = () => {
     // call dom parser
     (() => {
       if (dom) {
-        console.log('fired');
         buildTree(dom, unassigned.current, nodeData, setNodeData, setTree);
         const temp = {...unassignedLog.current}
-        console.log('temp',temp)
         setMetricsTree({...temp})
-        console.log(metricsTree, unassignedLog, temp);
       }
     })();
   }, [dom]);
@@ -92,7 +89,7 @@ const App = () => {
             </div>
           </TabPanel>
           <TabPanel value='1'>
-            <h1 style={{ color: 'white' }}>Tab 2</h1>
+            <MetricsTreeContainer data={metricsTree} />
           </TabPanel>
         </TabContext>
       </div>

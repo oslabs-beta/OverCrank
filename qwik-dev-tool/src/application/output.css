@@ -568,6 +568,22 @@ video {
   isolation: isolate;
 }
 
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-3 {
+  margin: 0.75rem;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -607,6 +623,10 @@ video {
 
 .hidden {
   display: none;
+}
+
+.h-1 {
+  height: 0.25rem;
 }
 
 .h-px {
@@ -679,6 +699,11 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
 }
 
 .truncate {
@@ -844,8 +869,16 @@ video {
   transition-duration: 150ms;
 }
 
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 body {
@@ -882,6 +915,34 @@ body {
 
 ::-webkit-resizer {
   background-color: #666;
+}
+
+div.custom-container {
+  background-color: #242424;
+  padding: 20px;
+}
+
+svg.custom .node circle {
+  fill: #F3F3FF;
+  stroke: #2593B8;
+  stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+  font-size: 11px;
+  background-color: #444;
+  fill: #F4F4F4;
+  text-shadow: 0 1px 4px black;
+}
+
+svg.custom .node {
+  cursor: pointer;
+}
+
+svg.custom path.link {
+  fill: none;
+  stroke: #2593B8;
+  stroke-width: 1.5px;
 }
 
 .first-letter\:max-w-4xl::first-letter {

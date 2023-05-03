@@ -5,28 +5,6 @@ import { debounce } from "./debounce";
 
 declare const chrome: any
 
-const waitForDom = debounce(getDOM, 1200);
-
-const domAndLog = async (unassignedLog: MutableRefObject<MetricsNode>, setDOM: Dispatch<SetStateAction<Document | null>>) => {
-  let temp = {...unassignedLog.current}
-  await chrome.devtools.network.getHAR((harLog: {entries: HarLogEntry[]}): void => {
-    console.log(harLog)
-    harLog.entries.forEach(entry => {
-      entry.request.headers.forEach(el => {
-        if (el.name === 'Referer') {
-          temp = handleNested(el.value, entry.request.url, temp)
-        }
-      })
-    })
-    console.log('ASSIGNING', temp, 'to ref', unassignedLog)
-    unassignedLog.current = {...temp}
-    console.log('ASSIGNED', temp, 'to ref', unassignedLog, 'DONE')
-  });
-  getDOM(setDOM);
-}
-
-const waitForDomAndLog = debounce(domAndLog, 1500)
-
 const handleNested = (ref:string, url: string, current: MetricsNode): MetricsNode => {
   if (current.name === url) return current
   if (current.name === ref) {
@@ -43,14 +21,25 @@ const handleNested = (ref:string, url: string, current: MetricsNode): MetricsNod
   return current
 }
 
-// const assignLog = (entry: HarLogEntry, temp: MetricsNode) => {
-//   entry.request.headers.forEach(el => {
-//     if (el.name === 'Referer') {
-//       console.log(el, entry.request.url)
-//       return handleNested(entry.request.url, temp)
-//     }
-//   })
-// }
+const domAndLog = async (unassignedLog: MutableRefObject<MetricsNode>, setDOM: Dispatch<SetStateAction<Document | null>>) => {
+  let temp = {...unassignedLog.current}
+  await chrome.devtools.network.getHAR((harLog: {entries: HarLogEntry[]}): void => {
+    console.log(harLog)
+    harLog.entries.forEach(entry => {
+      entry.request.headers.forEach(el => {
+        if (el.name === 'Referer') {
+          temp = handleNested(el.value, entry.request.url, temp)
+        }
+      })
+    })
+    // console.log('ASSIGNING', temp, 'to ref', unassignedLog)
+    unassignedLog.current = {...temp}
+    // console.log('ASSIGNED', temp, 'to ref', unassignedLog, 'DONE')
+  });
+  getDOM(setDOM);
+}
+
+const waitForDomAndLog = debounce(domAndLog, 1000)
 
 const assign = (url: string, content: string, unassigned: MutableRefObject<Links>):void => {
   chrome.devtools.network.getHAR((harLog: {entries: HarLogEntry[]}): void => {
@@ -79,7 +68,6 @@ const assign = (url: string, content: string, unassigned: MutableRefObject<Links
             }
           }
         }
-        // break;
       }
     }
   })
@@ -93,12 +81,6 @@ export const getResources = (unassigned: MutableRefObject<Links>, unassignedLog:
         !resource.url.includes('sourcemap')
       ) {
         await resource.getContent((content, encoding) => assign(resource.url, content, unassigned))
-        // await chrome.devtools.network.getHAR((harLog: {entries: HarLogEntry[]}): void => {
-        //   console.log(harLog)
-        //   harLog.entries.forEach(el => assignLog(el, unassignedLog))
-        // });
-        // waitForDom(setDOM);
-        // waitForDomAndLog(unassignedLog, setDOM)
         waitForDomAndLog(unassignedLog, setDOM)
       }
     }

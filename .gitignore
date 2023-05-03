@@ -28,3 +28,4 @@ bundle
 # User Added
 src/extension/bundle
 package-lock.json
+stats.html

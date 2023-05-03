@@ -32,7 +32,7 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
   const selectClick: ClickAction = (event, id) => {
     if (expanded.includes(id)) setExpanded(expanded.filter((e) => e !== id));
     else setExpanded(expanded.concat(id));
-    console.log('Prev Node', prevSelectedItem);
+    // console.log('Prev Node', prevSelectedItem);
     if (
       prevSelectedItem &&
       prevSelectedItem.style &&
@@ -41,8 +41,8 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
       prevSelectedItem.style.removeProperty('background-color');
     nodeData[id].htmlElement.style.backgroundColor = 'black'; //'rgba(106, 90, 205, 0.6)';
     prevSetSelectedItem(nodeData[id].htmlElement);
-    console.log('New Node', nodeData[id].htmlElement);
-    console.log('Clicked nodeId: ' + String(id));
+    // console.log('New Node', nodeData[id].htmlElement);
+    // console.log('Clicked nodeId: ' + String(id));
     setCurrentNode(Number(id));
   };
 

@@ -1,4 +1,5 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { agate } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Typography } from '@mui/material';
 import { FC } from 'react';
@@ -16,6 +17,8 @@ type Info = {
   operation: (string | null)[] | null;
   metrics: Metrics[] | null;
 };
+
+SyntaxHighlighter.registerLanguage('javascript', js);
 
 const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
   const info: Info = {
@@ -122,7 +125,7 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
         >
           <h6>Operation: </h6>
           <SyntaxHighlighter
-            language='typescript'
+            language='javascript'
             style={agate}
             showLineNumbers={true}
             customStyle={{

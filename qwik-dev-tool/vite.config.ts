@@ -1,13 +1,14 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), cssInjectedByJsPlugin()],
+  plugins: [react(), cssInjectedByJsPlugin(), visualizer() as PluginOption],
   test: {
     globals: true,
     environment: 'jsdom',
