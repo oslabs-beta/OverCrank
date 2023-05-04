@@ -1,12 +1,12 @@
-# Qwik-Dev-Tool
+# OverCrank
 
 ## LOGO (INSERT HERE)
 
 ### A Chrome Development Extension for Qwik Developers
 
-Qwik Dev Tool is a Chome extension designed to display and visualize innerworkings the [Qwik Web Framework](https://qwik.builder.io/docs/think-qwik/). This is done by capturing the lazy loaded network requests and interpreting the resumability model which is embedded within the HTML of all Qwik websites.
+OverCrank is a Chome extension designed to display and visualize innerworkings the [Qwik Web Framework](https://qwik.builder.io/docs/think-qwik/). This is done by capturing the lazy loaded network requests and interpreting the resumability model which is embedded within the HTML of all Qwik websites.
 
-![GIF demonstrating the Qwik Dev Tool]()
+![GIF demonstrating the OverCrank]()
 
 ### Built Using
 
@@ -25,13 +25,13 @@ Qwik is blazing fast thanks to removing the need for hydrations and instead util
 
 ## Installation
 
-At the time of writing, Qwik Dev Tools only support Chromium browsers.
+At the time of writing, OverCrank only support Chromium browsers.
 
 ### Easy Install
 
-Qwik Dev Tools can be found in the [Chrome WebStore](). Simply select "Add to Chrome" to add the tool to your browser.
+OverCrank can be found in the [Chrome WebStore](). Simply select "Add to Chrome" to add the tool to your browser.
 
-![Qwik Dev Tools Chrome Webstore Install]()
+![OverCrank Chrome Webstore Install]()
 
 Simply click Add to Chrome to add the tool to your browser.
 
@@ -46,19 +46,19 @@ $ npm install
 $ npm run build
 ```
 
-Inside your browser navagate to `chrome://extensions/` and select `Load unpacked`. Using the file browser select the `extension` folder located within this directory at `qwik-dev-tool/src/extension`. If successful, Qwik Dev Tool will appear as an installed extension.
+Inside your browser navagate to `chrome://extensions/` and select `Load unpacked`. Using the file browser select the `extension` folder located within this directory at `qwik-dev-tool/src/extension`. If successful, OverCrank will appear as an installed extension.
 
 ## Usage
 
-Qwik Dev Tool targets Qwik development websites built in development mode using the standard `npm run dev` build flow. Instructions for getting a Qwik page up and running to test can be found at the [Getting Started Qwikly page](https://qwik.builder.io/docs/getting-started/)
+OverCrank targets Qwik development websites built in development mode using the standard `npm run dev` build flow. Instructions for getting a Qwik page up and running to test can be found at the [Getting Started Qwikly page](https://qwik.builder.io/docs/getting-started/)
 
 ### Access
 
-The Qwik Dev Tool can be found inside the developer console any Chromium browser. To open the developer console, open the menu in the upper-right-hand corner of the browser window and select More Tools > Developer Tools. An alternative approach is to use Option + ⌘ + J (on macOS), or Shift + CTRL + J (on Windows/Linux). Inside the developer console, select the Qwik Dev Tool to view the interface.
+The OverCrank Tool can be found inside the developer console any Chromium browser. To open the developer console, open the menu in the upper-right-hand corner of the browser window and select More Tools > Developer Tools. An alternative approach is to use Option + ⌘ + J (on macOS), or Shift + CTRL + J (on Windows/Linux). Inside the developer console, select the OverCrank to view the interface.
 
 ### Inspection
 
-Upon loading of a Qwik developement website, Qwik Dev Tool parses the HTML to identify Qwik components and indicates when data has been fetched according to Chrome fetch data. When any item within the hierarchical representation of the tree view of the current page is selected the panel on the right will display any Qwik relevant data. Once the component is loaded, the panel will display the deserialized information as well as other relevant details.
+Upon loading of a Qwik developement website, OverCrank parses the HTML to identify Qwik components and indicates when data has been fetched according to Chrome fetch data. When any item within the hierarchical representation of the tree view of the current page is selected the panel on the right will display any Qwik relevant data. Once the component is loaded, the panel will display the deserialized information as well as other relevant details.
 
 ## Contribute
 
