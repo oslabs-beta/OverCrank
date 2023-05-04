@@ -45,7 +45,7 @@ const TopBar = () => {
           <RefreshIcon />
         </IconButton>
         <Link
-          href='https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool'
+          href='https://github.com/oslabs-beta/OverCrank'
           target='_blank'
           rel='noopener noreferrer'
           underline='none'
@@ -66,7 +66,7 @@ const TopBar = () => {
           </IconButton>
         </Link>
         <Link
-          href='https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool/blob/main/README.md'
+          href='https://www.overcrank.dev/'
           target='_blank'
           rel='noopener noreferrer'
           underline='none'
@@ -77,7 +77,7 @@ const TopBar = () => {
             component='span'
             className='p-2 align-middle'
           >
-            Docs
+            Website
           </Typography>
           <OpenInBrowserIcon></OpenInBrowserIcon>
         </Link>
