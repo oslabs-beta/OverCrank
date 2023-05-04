@@ -1,14 +1,22 @@
 # OverCrank
 
-## LOGO (INSERT HERE)
+<br>
+    <div align="center">
+        <a href='https://www.overcrank.dev/'>
+            <img src='imgs/overcrank-2d-logo.png' width='250px'/>
+        </a>
+    </div>
+<br>q
 
 ### A Chrome Development Extension for Qwik Developers
 
-OverCrank is a Chome extension designed to display and visualize innerworkings the [Qwik Web Framework](https://qwik.builder.io/docs/think-qwik/). This is done by capturing the lazy loaded network requests and interpreting the resumability model which is embedded within the HTML of all Qwik websites.
+OverCrank is a Chome extension designed to display and visualize the inner workings of the [Qwik Web Framework](https://qwik.builder.io/docs/think-qwik/). This is done by capturing the lazy loaded network requests and interpreting the resumability model which is embedded within the HTML of all Qwik websites.
 
-![GIF demonstrating the OverCrank]()
+![GIF demonstrating Tree View in OverCrank](imgs/tree-view-minified.gif)
 
-### Built Using
+<br>
+
+![GIF demonstrating Graph View in OverCrank](imgs/graph-view-minified.gif)
 
 ## Contents
 
@@ -17,7 +25,7 @@ OverCrank is a Chome extension designed to display and visualize innerworkings t
 - [Usage](#usage)
 - [Contribute](#contribute)
 - [Qwik Community](#community)
-- [Authors](#authors)
+- [About Us](#about)
 
 ## Motiviations
 
@@ -40,8 +48,8 @@ Simply click Add to Chrome to add the tool to your browser.
 Clone the Git repo, install the dependencies, and build the extension.
 
 ```bash
-$ git clone https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool.git
-$ cd OSP1-Qwik-Dev-Tool/qwik-dev-tool
+$ git clone https://github.com/oslabs-beta/OverCrank.git
+$ cd OverCrank/qwik-dev-tool
 $ npm install
 $ npm run build
 ```
@@ -64,7 +72,7 @@ Upon loading of a Qwik developement website, OverCrank parses the HTML to identi
 
 Contributions are always welcomed as Qwik is a rapidly evolving technology that is still subject to change. If you have feature requests or bugs to report, please use the Github Issues page and writeup your request. To submit code changes, please follow these steps to get your work merged into the repo:
 
-1. Clone the repo and make a new branch: `$ git checkout https://github.com/oslabs-beta/OSP1-Qwik-Dev-Tool.git -b [name_of_new_branch]`
+1. Clone the repo and make a new branch: `$ git checkout https://github.com/oslabs-beta/OverCrank.git -b [name_of_new_branch]`
 2. Add a feature,fix a bug, or refactor code
 3. Write or update tests for the changes you made, if necessary
 4. Open a Pull Request targetting the `dev` branch with a comprehensive description of changes
@@ -75,4 +83,6 @@ Thank you in advance for contributing!
 
 The Qwik Community is growing and always looking for those interested in taking the plunge to work with the latest technology. To find out more about Qwik, feel free to reach out to the community on a number of different platforms which can be found [here](https://qwikcommunity.com/).
 
-## Authors
+## About Us
+
+More details about the team can be found on the [OverCrank website](https://www.overcrank.dev/)
