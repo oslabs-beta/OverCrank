@@ -39,7 +39,7 @@ const domAndLog = async (unassignedLog: MutableRefObject<MetricsNode>, setDOM: D
   getDOM(setDOM);
 }
 
-const waitForDomAndLog = debounce(domAndLog, 1000)
+const waitForDomAndLog = debounce(domAndLog, 600)
 
 const assign = (url: string, content: string, unassigned: MutableRefObject<Links>):void => {
   chrome.devtools.network.getHAR((harLog: {entries: HarLogEntry[]}): void => {

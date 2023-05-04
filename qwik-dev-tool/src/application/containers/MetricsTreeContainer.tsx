@@ -9,18 +9,18 @@ type Props = {
 
 const MetricsTreeContainer: FC<Props> = ({ data }) => {
   return (
-    <div className='bg-neutral-800 flex flex-col w-full border-white border-2 p-2 max-h-fit h-full'>
+    <div className='bg-neutral-800 flex justify-center w-full border-white border-2 p-2 max-h-fit h-full'>
       <Tree
         data={data}
         margins={{
           bottom: 20,
           left: 50,
-          right: 500,
+          right: 225,
           top: 20,
         }}
         svgProps={{ className: 'custom' }}
         height={600}
-        width={1200}
+        width={1800}
       />
     </div>
   );

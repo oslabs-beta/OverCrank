@@ -629,8 +629,21 @@ video {
   height: 0.25rem;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-px {
   height: 1px;
+}
+
+.max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+
+.max-h-full {
+  max-height: 100%;
 }
 
 .min-h-full {
@@ -639,6 +652,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-1 {
+  width: 0.25rem;
 }
 
 .w-3 {
@@ -653,16 +670,12 @@ video {
   width: 100%;
 }
 
-.flex-shrink {
-  flex-shrink: 1;
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .shrink {
   flex-shrink: 1;
-}
-
-.flex-grow {
-  flex-grow: 1;
 }
 
 .grow {
@@ -917,31 +930,24 @@ body {
   background-color: #666;
 }
 
-div.custom-container {
-  background-color: #242424;
-  padding: 20px;
-}
-
 svg.custom .node circle {
   fill: #F3F3FF;
-  stroke: #2593B8;
+  stroke: #18B6F6;
   stroke-width: 1.5px;
 }
 
 svg.custom .node text {
-  font-size: 11px;
+  font-size: 12px;
   background-color: #444;
   fill: #F4F4F4;
-  text-shadow: 0 1px 4px black;
-}
-
-svg.custom .node {
-  cursor: pointer;
+  max-width: 100px;
+  word-break: break-all;
+  /* text-shadow: 0 1px 4px black; */
 }
 
 svg.custom path.link {
   fill: none;
-  stroke: #2593B8;
+  stroke: #ab7ef4b0;
   stroke-width: 1.5px;
 }
 
