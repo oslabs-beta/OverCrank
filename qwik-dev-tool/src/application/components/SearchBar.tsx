@@ -137,20 +137,32 @@ const SearchBar: React.FC<Props> = (props): JSX.Element => {
       )}
 
       <Button
-        className='p-2'
+        // className='m-3'
         variant='outlined'
-        sx={{ color: 'white', borderColor: 'white' }}
+        sx={{
+          color: 'white',
+          borderColor: 'white',
+          padding: '10px',
+          minWidth: '100px',
+        }}
         onClick={expandClick}
       >
-        Expand
+        {' '}
+        Expand{' '}
       </Button>
       <Button
-        className='p-2'
+        // className='m-3'
         variant='outlined'
-        sx={{ color: 'white', borderColor: 'white' }}
+        sx={{
+          color: 'white',
+          borderColor: 'white',
+          padding: '10px',
+          minWidth: '100px',
+        }}
         onClick={collapseAction}
       >
-        Collapse
+        {' '}
+        Collapse{' '}
       </Button>
     </div>
   );

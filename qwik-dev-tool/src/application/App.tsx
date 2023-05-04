@@ -23,11 +23,17 @@ declare const chrome: any;
 const App = () => {
   const [nodeData, setNodeData] = useState<NodeData>({});
   const [tree, setTree] = useState<JSX.Element | null>(null);
-  const [metricsTree, setMetricsTree] = useState<MetricsNode>({name: "http://localhost:5173/", children: []})
+  const [metricsTree, setMetricsTree] = useState<MetricsNode>({
+    name: 'http://localhost:5173/',
+    children: [],
+  });
   const [currentNode, setCurrentNode] = useState<number>(0);
   const [dom, setDOM] = useState<Document | null>(null);
   const unassigned = useRef<Links>({});
-  const unassignedLog = useRef<MetricsNode>({name: "http://localhost:5173/", children: []})
+  const unassignedLog = useRef<MetricsNode>({
+    name: 'http://localhost:5173/',
+    children: [],
+  });
   const [tabValue, setTabValue] = useState('0');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -43,8 +49,8 @@ const App = () => {
     (() => {
       if (dom) {
         buildTree(dom, unassigned.current, nodeData, setNodeData, setTree);
-        const temp = {...unassignedLog.current}
-        setMetricsTree({...temp})
+        const temp = { ...unassignedLog.current };
+        setMetricsTree({ ...temp });
       }
     })();
   }, [dom]);
@@ -88,7 +94,19 @@ const App = () => {
               ></DataViewContainer>
             </div>
           </TabPanel>
-          <TabPanel value='1'>
+          <TabPanel
+            value='1'
+            sx={{
+              padding: 0,
+              maxHeight: 'calc(100vh - 136px - 50px)',
+              '@media (min-height: 500px)': {
+                maxHeight: 'calc(100vh - 136px - 50px)',
+              },
+              width: 'auto',
+              flexGrow: 1,
+              overflowY: 'auto',
+            }}
+          >
             <MetricsTreeContainer data={metricsTree} />
           </TabPanel>
         </TabContext>

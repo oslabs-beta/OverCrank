@@ -69,9 +69,9 @@ const TreeViewContainer: FC<Props> = ({ tree, nodeData, setCurrentNode }) => {
           defaultExpandIcon={<ChevronRightIcon />}
           expanded={expanded}
           sx={{
-            maxHeight: 'calc(500px - 135px)',
+            // maxHeight: 'calc(500px - 135px - 50px)',
             '@media (min-height: 500px)': {
-              maxHeight: 'calc(100vh - 136px)',
+              maxHeight: 'calc(100vh - 136px - 50px)',
             },
             width: 'auto',
             flexGrow: 1,
