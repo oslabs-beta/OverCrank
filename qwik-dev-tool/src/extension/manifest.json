@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "OverCrank",
+  "description": "A Qwik Process Modeler",
+  "version": "0.0.1",
+  "icons": {
+    "16": "assets/overcrank-16.png",
+    "48": "assets/overcrank-48.png",
+    "128": "assets/overcrank-128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["../assets/overcrank-2d-logo.png"]
+    }
+  ],
+  "devtools_page": "devtools.html"
+}

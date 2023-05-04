@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  height: 'calc(100vh - 1px)';
+  background-color: black;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  background-color: #666;
+}
+::-webkit-scrollbar-track {
+  background-color: #646464;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #000;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #666;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-corner {
+  background-color: #646464;
+}
+::-webkit-resizer {
+  background-color: #666;
+}
+
+svg.custom .node circle {
+	fill: #F3F3FF;
+	stroke: #18B6F6;
+	stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+	font-size: 12px;
+	background-color: #444;
+	fill: #F4F4F4;
+  max-width: 100px;
+  word-break: break-all;
+	/* text-shadow: 0 1px 4px black; */
+}
+
+svg.custom path.link {
+	fill: none;
+	stroke: #ab7ef4b0;
+	stroke-width: 1.5px;
+}
