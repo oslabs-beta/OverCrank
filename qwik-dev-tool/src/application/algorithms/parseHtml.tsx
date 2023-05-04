@@ -138,7 +138,8 @@ const buildTree = (
                 child.nodeType === Node.TEXT_NODE ||
                 tagName === 'script' ||
                 tagName === '#comment' ||
-                tagName === 'path'
+                tagName === 'path' ||
+                tagName === 'br'
               ) {
                 return;
               }

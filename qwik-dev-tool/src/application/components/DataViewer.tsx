@@ -3,7 +3,7 @@ import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { agate } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Typography } from '@mui/material';
 import { FC } from 'react';
-import { NodeData, Metrics} from '../types/types';
+import { NodeData, Metrics } from '../types/types';
 import MetricsChart from './MetricsChart';
 
 type Props = {
@@ -26,7 +26,7 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
     loaded: null,
     action: null,
     operation: null,
-    metrics: null
+    metrics: null,
   };
   if (Object.keys(nodeData).length) {
     const events: string[] = Object.keys(nodeData[currentNode].events);
@@ -78,11 +78,11 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
       }
       return metrics;
     })();
-    info.element = nodeData[currentNode].element
-    info.loaded = loaded
+    info.element = nodeData[currentNode].element;
+    info.loaded = loaded;
     info.action = actions;
     info.operation = operations;
-    info.metrics = metrics
+    info.metrics = metrics;
   }
   return (
     <div className='flex flex-col p-2'>
@@ -108,7 +108,7 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
           id='size'
           className='py-1'
         >
-          <h6>Size: {info.metrics?.map((el => el?.size))}</h6>
+          <h6>Size: {info.metrics?.map((el) => el?.size)}</h6>
         </div>
         <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
         <div
@@ -116,7 +116,7 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
           className='py-1'
         >
           <h6>Download Metrics:</h6>
-          <MetricsChart metrics={info.metrics}/>
+          <MetricsChart metrics={info.metrics} />
         </div>
         <hr className='h-px my-4 bg-gray-200 border-0 dark:bg-gray-700' />
         <div
@@ -129,6 +129,9 @@ const DataViewer: FC<Props> = ({ nodeData, currentNode }) => {
             style={agate}
             showLineNumbers={true}
             customStyle={{
+              // '@media (min-height: 500px)': {
+              //   maxHeight: 'calc(100vh - 136px - 50px)',
+              // },
               // NOTE: Calculations are 100vh - TopBar height - Component above height
               maxHeight: 'calc(100vh - 136px - 255px)',
               minHeight: '175px',
