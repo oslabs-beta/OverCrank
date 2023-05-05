@@ -37,9 +37,7 @@ At the time of writing, OverCrank only support Chromium browsers.
 
 ### Easy Install
 
-OverCrank can be found in the [Chrome WebStore](). Simply select "Add to Chrome" to add the tool to your browser.
-
-<!-- [OverCrank Chrome Webstore Install]() -->
+OverCrank can be found in the [Chrome WebStore](https://chrome.google.com/webstore/detail/overcrank/liieapoeenabnghbiimfeffghlaiallg?hl=en). Simply select "Add to Chrome" to add the tool to your browser.
 
 Simply click Add to Chrome to add the tool to your browser.
 
